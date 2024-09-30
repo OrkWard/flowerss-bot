@@ -257,7 +257,7 @@ func (c *Core) CreateSource(ctx context.Context, sourceURL string) (*model.Sourc
 		return s, nil
 	}
 
-	if err != nil && err != ErrSourceNotExist {
+	if err != ErrSourceNotExist {
 		return nil, err
 	}
 
