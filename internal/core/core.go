@@ -17,7 +17,7 @@ import (
 	"github.com/indes/flowerss-bot/internal/feed"
 	"github.com/indes/flowerss-bot/internal/log"
 	"github.com/indes/flowerss-bot/internal/model"
-	"github.com/indes/flowerss-bot/internal/preview"
+	tgraph "github.com/indes/flowerss-bot/internal/preview"
 	"github.com/indes/flowerss-bot/internal/storage"
 	"github.com/indes/flowerss-bot/pkg/client"
 )
@@ -294,8 +294,15 @@ func (c *Core) AddSourceContents(
 	for _, item := range items {
 		wg.Add(1)
 		previewURL := ""
+		var link string
+		if strings.HasPrefix(item.Link, "http") {
+			link = item.Link
+		} else {
+			link = "https://" + strings.TrimLeft(item.Link, "/")
+		}
+
 		if config.EnableTelegraph && len([]rune(item.Content)) > config.PreviewText {
-			previewURL, _ = tgraph.PublishHtml(source.Title, item.Title, item.Link, item.Content)
+			previewURL, _ = tgraph.PublishHtml(source.Title, item.Title, link, item.Content)
 		}
 		content := &model.Content{
 			Title:        strings.Trim(item.Title, " "),
@@ -303,7 +310,7 @@ func (c *Core) AddSourceContents(
 			SourceID:     source.ID,
 			RawID:        item.GUID,
 			HashID:       model.GenHashID(source.Link, item.GUID),
-			RawLink:      item.Link,
+			RawLink:      link,
 			TelegraphURL: previewURL,
 		}
 		contents = append(contents, content)
