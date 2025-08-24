@@ -169,7 +169,7 @@ func (t TplData) Render(mode tb.ParseMode) (string, error) {
 		return "", err
 	}
 
-	return strings.TrimSpace(string(wb.Bytes())), nil
+	return strings.TrimSpace(wb.String()), nil
 }
 
 func (t TplData) replaceHTMLTags(s string) string {
