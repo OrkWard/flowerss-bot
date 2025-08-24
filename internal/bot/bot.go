@@ -58,6 +58,7 @@ func (b *Bot) registerCommands(appCore *core.Core) error {
 		handler.NewAddSubscription(appCore),
 		handler.NewRemoveSubscription(b.tb, appCore),
 		handler.NewListSubscription(appCore),
+		handler.NewCheck(appCore),
 		handler.NewRemoveAllSubscription(),
 		handler.NewOnDocument(b.tb, appCore),
 		handler.NewSet(b.tb, appCore),

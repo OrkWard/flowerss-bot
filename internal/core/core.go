@@ -87,8 +87,6 @@ func NewCoreFormConfig() *Core {
 	sqlDB.SetMaxIdleConns(10)
 	sqlDB.SetMaxOpenConns(50)
 
-	subscriptionStorage := storage.NewSubscriptionStorageImpl(db)
-
 	// httpclient
 	clientOpts := []client.HttpClientOption{
 		client.WithTimeout(10 * time.Second),
@@ -109,7 +107,7 @@ func NewCoreFormConfig() *Core {
 		storage.NewUserStorageImpl(db),
 		storage.NewContentStorageImpl(db),
 		storage.NewSourceStorageImpl(db),
-		subscriptionStorage,
+		storage.NewSubscriptionStorageImpl(db),
 		feedParser,
 		httpClient,
 	)
