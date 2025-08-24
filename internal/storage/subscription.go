@@ -119,6 +119,8 @@ func (s *SubscriptionStorageImpl) getSubscriptionsOrderBy(opts *GetSubscriptions
 	switch opts.SortType {
 	case SubscriptionSortTypeCreatedTimeDesc:
 		return "created_at desc"
+	case SubscriptionSortTypeIdAsc:
+		return "id asc"
 	}
 	return ""
 }

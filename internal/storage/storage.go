@@ -40,6 +40,7 @@ type SubscriptionSortType = int
 
 const (
 	SubscriptionSortTypeCreatedTimeDesc SubscriptionSortType = iota
+	SubscriptionSortTypeIdAsc           SubscriptionSortType = iota
 )
 
 type GetSubscriptionsOptions struct {

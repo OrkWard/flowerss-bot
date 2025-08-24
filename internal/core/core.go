@@ -131,7 +131,7 @@ func (c *Core) Init() error {
 
 // GetUserSubscribedSources 获取用户订阅的订阅源
 func (c *Core) GetUserSubscribedSources(ctx context.Context, userID int64) ([]*model.Source, error) {
-	opt := &storage.GetSubscriptionsOptions{Count: -1}
+	opt := &storage.GetSubscriptionsOptions{Count: -1, SortType: storage.SubscriptionSortTypeIdAsc}
 	result, err := c.subscriptionStorage.GetSubscriptionsByUserID(ctx, userID, opt)
 	if err != nil {
 		return nil, err
